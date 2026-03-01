@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado OCR — Extrator de Documentos LAB</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container wide">
+        <h1>🔍 Resultado OCR Read</h1>
+
+        <!-- Cartão de informações gerais -->
+        <div class="card">
+            <h2>Informações</h2>
+            <table class="summary-table">
+                <tr>
+                    <th>Modelo</th>
+                    <td><code>prebuilt-read</code> (OCR)</td>
+                </tr>
+                <tr>
+                    <th>Arquivo Fonte</th>
+                    <td>{{ result.source_filename }}</td>
+                </tr>
+                <tr>
+                    <th>Total de Páginas</th>
+                    <td>{{ result.total_pages }}</td>
+                </tr>
+                <tr>
+                    <th>Total de Palavras</th>
+                    <td>{{ result.total_words }}</td>
+                </tr>
+                {% if result.languages %}
+                <tr>
+                    <th>Idiomas Detectados</th>
+                    <td>{{ result.languages | join(", ") }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Texto Manuscrito</th>
+                    <td>
+                        {% if result.has_handwriting %}
+                            <span class="badge badge-warning">Sim — detectado</span>
+                        {% else %}
+                            <span class="badge badge-ok">Não detectado</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID da Análise</th>
+                    <td><code>{{ result.analysis_id }}</code></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Texto completo extraído -->
+        <div class="card">
+            <h2>Texto Extraído</h2>
+            {% if result.content %}
+            <pre class="ocr-text">{{ result.content }}</pre>
+            {% else %}
+            <p class="muted">Nenhum texto foi extraído deste documento.</p>
+            {% endif %}
+        </div>
+
+        <!-- Detalhes por página -->
+        {% if result.pages %}
+        <div class="card">
+            <h2>Detalhes por Página</h2>
+            {% for page in result.pages %}
+            <div class="page-detail">
+                <h3>Página {{ page.page_number }}
+                    {% if page.width and page.height %}
+                    <span class="page-meta">{{ page.width }} × {{ page.height }} {{ page.unit or "px" }}</span>
+                    {% endif %}
+                    <span class="page-meta">— {{ page.lines | length }} linhas, {{ page.words | length }} palavras</span>
+                </h3>
+
+                {% if page.words %}
+                <details>
+                    <summary>Ver palavras e confiança</summary>
+                    <div class="table-wrapper">
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Palavra</th>
+                                    <th>Confiança</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for word in page.words %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ word.content }}</td>
+                                    <td>{{ "%.2f" | format(word.confidence) if word.confidence is not none else "—" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Download e ações -->
+        <div class="actions">
+            <a href="/download/txt/{{ result.analysis_id }}" class="btn">⬇ Baixar Texto (.txt)</a>
+            <a href="/" class="btn btn-outline">← Nova Análise</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,279 @@
+/* ==========================================================================
+   Extrator de Documentos LAB — Estilos
+   ========================================================================== */
+
+/* --- Base --- */
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Container --- */
+.container {
+    max-width: 560px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+}
+.container.wide {
+    max-width: 800px;
+}
+
+/* --- Typography --- */
+h1 {
+    text-align: center;
+    color: #2d3e50;
+    margin-bottom: 0.2em;
+}
+h2 {
+    color: #2d3e50;
+    font-size: 1.15em;
+    margin-top: 0;
+}
+.subtitle {
+    text-align: center;
+    color: #0078d4;
+    font-weight: bold;
+    margin-top: 0;
+}
+.description {
+    text-align: center;
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 1.5em;
+}
+.muted {
+    color: #999;
+    font-style: italic;
+}
+
+/* --- Form --- */
+label {
+    display: block;
+    margin-bottom: 0.4em;
+    font-weight: bold;
+    color: #333;
+}
+input[type="file"],
+select {
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.45em;
+    box-sizing: border-box;
+}
+select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+}
+
+/* --- Help box (receipt vs invoice guidance) --- */
+.help-box {
+    background: #f0f7ff;
+    border: 1px solid #c4daef;
+    border-radius: 6px;
+    padding: 0.8em 1em;
+    margin-bottom: 1.2em;
+    font-size: 0.88em;
+    color: #333;
+}
+.help-box strong {
+    color: #0056a3;
+}
+.help-box ul {
+    margin: 0.4em 0 0 1.2em;
+    padding: 0;
+}
+.help-box li {
+    margin-bottom: 0.3em;
+}
+
+/* --- Buttons --- */
+button,
+.btn {
+    display: inline-block;
+    background: #0078d4;
+    color: #fff;
+    border: none;
+    padding: 0.7em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    text-align: center;
+}
+button:hover,
+.btn:hover {
+    background: #005fa3;
+}
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+.btn-secondary {
+    background: #217346;
+}
+.btn-secondary:hover {
+    background: #185a34;
+}
+.btn-outline {
+    background: transparent;
+    color: #0078d4;
+    border: 1px solid #0078d4;
+}
+.btn-outline:hover {
+    background: #e8f0fe;
+}
+
+/* --- Status --- */
+#status {
+    margin-top: 1em;
+    color: #0078d4;
+    text-align: center;
+}
+
+/* --- Alert --- */
+.alert {
+    padding: 0.8em 1em;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    font-size: 0.95em;
+}
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+/* --- Cards --- */
+.card {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    padding: 1.2em;
+    margin-bottom: 1em;
+}
+
+/* --- Summary table --- */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.summary-table th {
+    text-align: left;
+    width: 40%;
+    padding: 0.4em 0.5em;
+    color: #555;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+.summary-table td {
+    padding: 0.4em 0.5em;
+    border-bottom: 1px solid #eee;
+}
+
+/* --- Items table --- */
+.table-wrapper {
+    overflow-x: auto;
+}
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93em;
+}
+.items-table th,
+.items-table td {
+    padding: 0.45em 0.6em;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+}
+.items-table thead th {
+    background: #0078d4;
+    color: #fff;
+}
+.items-table tbody tr:hover {
+    background: #f0f7ff;
+}
+
+/* --- Badges --- */
+.badge {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+.badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+.badge-ok {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* --- Actions bar --- */
+.actions {
+    display: flex;
+    gap: 0.7em;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+code {
+    background: #eee;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* --- OCR Read result --- */
+.ocr-text {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 1em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.88em;
+    line-height: 1.5;
+    max-height: 500px;
+    overflow-y: auto;
+    color: #333;
+}
+.page-detail {
+    margin-bottom: 1em;
+    padding-bottom: 0.6em;
+    border-bottom: 1px solid #eee;
+}
+.page-detail:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.page-detail h3 {
+    font-size: 0.95em;
+    color: #2d3e50;
+    margin: 0.4em 0;
+}
+.page-meta {
+    font-weight: normal;
+    color: #888;
+    font-size: 0.85em;
+}
+details {
+    margin-top: 0.3em;
+}
+details summary {
+    cursor: pointer;
+    color: #0078d4;
+    font-size: 0.88em;
+    font-weight: 600;
+}
+details summary:hover {
+    text-decoration: underline;
+}

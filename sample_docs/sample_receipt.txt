@@ -1,0 +1,24 @@
+================================
+        CONTOSO CAFE
+     123 Main St, Suite 1
+     Seattle, WA 98101
+
+  Date: 2025-01-20  Time: 14:32
+================================
+
+  1x  Cappuccino       $5.00
+  2x  Blueberry Muffin $4.00
+  1x  Orange Juice     $3.50
+
+--------------------------------
+  Subtotal:           $12.50
+  Tax (8%):            $1.00
+  TOTAL:              $13.50
+
+  Payment: Visa *1234
+  
+  Thank you for your visit!
+================================
+
+(This is a text placeholder. For best results,
+ convert this to a PDF or use a real receipt/photo.)

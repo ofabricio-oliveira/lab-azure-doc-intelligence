@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrator de Documentos (Azure Document Intelligence LAB)</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Extrator de Documentos</h1>
+        <p class="subtitle">Azure Document Intelligence LAB</p>
+        <p class="description">
+            Envie um documento (PDF, PNG, JPG) e escolha o modelo prebuilt do
+            Azure AI Document Intelligence para analisá-lo.
+        </p>
+
+        <form id="uploadForm" action="/analyze" method="post" enctype="multipart/form-data">
+            <label for="file">Selecione o arquivo (PDF, PNG, JPG — máx {{ max_size }} MB):</label>
+            <input type="file" id="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required>
+
+            <label for="document_type">Modelo prebuilt:</label>
+            <select id="document_type" name="document_type" required>
+                <option value="read">🔍 OCR Read — Extrair texto</option>
+                <option value="receipt" selected>🧾 Recibo (Receipt) — Dados estruturados</option>
+                <option value="invoice">📃 Fatura (Invoice) — Dados estruturados</option>
+            </select>
+
+            <!-- Orientação: o que cada modelo faz -->
+            <div class="help-box">
+                <strong>O que cada modelo faz?</strong>
+                Estes são
+                <a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/?view=doc-intel-4.0.0" target="_blank">modelos prebuilt</a>
+                do Azure Document Intelligence:
+                <ul>
+                    <li><strong>🔍 OCR Read</strong>
+                        (<a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/prebuilt/read?view=doc-intel-4.0.0" target="_blank">prebuilt-read</a>)
+                        — Extração de <em>texto puro</em> via OCR. Reconhece texto impresso e manuscrito,
+                        detecta idiomas e retorna páginas, linhas e palavras. É a base dos demais modelos.</li>
+                    <li><strong>🧾 Recibo</strong>
+                        (<a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/prebuilt/receipt?view=doc-intel-4.0.0" target="_blank">prebuilt-receipt</a>)
+                        — Extrai <em>campos estruturados</em> de comprovantes de venda:
+                        comerciante, data, itens, total, impostos, forma de pagamento.</li>
+                    <li><strong>📃 Fatura</strong>
+                        (<a href="https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/prebuilt/invoice?view=doc-intel-4.0.0" target="_blank">prebuilt-invoice</a>)
+                        — Extrai <em>campos estruturados</em> de documentos de cobrança:
+                        fornecedor, cliente, itens, total, vencimento, condições de pagamento.</li>
+                </ul>
+            </div>
+
+            <button type="submit" id="btnAnalyze">Analisar</button>
+        </form>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const statusDiv = document.getElementById('status');
+        const btn = document.getElementById('btnAnalyze');
+        form.onsubmit = function() {
+            btn.disabled = true;
+            btn.textContent = 'Analisando…';
+            statusDiv.innerHTML = '⏳ Enviando e analisando, aguarde (pode levar de 15 a 30 segundos)…';
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado — Extrator de Documentos LAB</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container wide">
+        <h1>📄 Resultado da Análise</h1>
+
+        {% if result.needs_review %}
+        <div class="alert alert-warning">
+            ⚠️ <strong>Requer Revisão</strong> — Total ou data ausente. Verifique os dados extraídos.
+        </div>
+        {% endif %}
+
+        <!-- Cartão resumo -->
+        <div class="card">
+            <h2>Resumo</h2>
+            <table class="summary-table">
+                <tr>
+                    <th>Tipo de Documento</th>
+                    <td>{{ "Recibo" if result.document_type == "receipt" else "Fatura" }}</td>
+                </tr>
+                <tr>
+                    <th>Fornecedor / Estabelecimento</th>
+                    <td>{{ result.vendor_name or "—" }}</td>
+                </tr>
+                {% if result.vendor_address %}
+                <tr>
+                    <th>Endereço do Fornecedor</th>
+                    <td>{{ result.vendor_address }}</td>
+                </tr>
+                {% endif %}
+                {% if result.vendor_phone %}
+                <tr>
+                    <th>Telefone</th>
+                    <td>{{ result.vendor_phone }}</td>
+                </tr>
+                {% endif %}
+                {% if result.vendor_tax_id %}
+                <tr>
+                    <th>CNPJ / Tax ID</th>
+                    <td>{{ result.vendor_tax_id }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Data</th>
+                    <td>{{ result.document_date or "—" }}</td>
+                </tr>
+                {% if result.transaction_time %}
+                <tr>
+                    <th>Horário</th>
+                    <td>{{ result.transaction_time }}</td>
+                </tr>
+                {% endif %}
+                {% if result.document_id %}
+                <tr>
+                    <th>{% if result.document_type == "invoice" %}Nº da Fatura{% else %}Nº do Recibo{% endif %}</th>
+                    <td>{{ result.document_id }}</td>
+                </tr>
+                {% endif %}
+                {% if result.due_date %}
+                <tr>
+                    <th>Vencimento</th>
+                    <td>{{ result.due_date }}</td>
+                </tr>
+                {% endif %}
+                {% if result.customer_name %}
+                <tr>
+                    <th>Cliente</th>
+                    <td>{{ result.customer_name }}</td>
+                </tr>
+                {% endif %}
+                {% if result.customer_address %}
+                <tr>
+                    <th>Endereço do Cliente</th>
+                    <td>{{ result.customer_address }}</td>
+                </tr>
+                {% endif %}
+                {% if result.shipping_address %}
+                <tr>
+                    <th>Endereço de Entrega</th>
+                    <td>{{ result.shipping_address }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Moeda</th>
+                    <td>{{ result.currency or "—" }}</td>
+                </tr>
+                <tr>
+                    <th>Subtotal</th>
+                    <td>{{ result.subtotal if result.subtotal is not none else "—" }}</td>
+                </tr>
+                <tr>
+                    <th>Impostos</th>
+                    <td>{{ result.tax if result.tax is not none else "—" }}</td>
+                </tr>
+                {% if result.tip is not none %}
+                <tr>
+                    <th>Gorjeta</th>
+                    <td>{{ result.tip }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Total</th>
+                    <td><strong>{{ result.total if result.total is not none else "—" }}</strong></td>
+                </tr>
+                {% if result.payment_method %}
+                <tr>
+                    <th>Pagamento</th>
+                    <td>{{ result.payment_method }}</td>
+                </tr>
+                {% endif %}
+                {% if result.payment_term %}
+                <tr>
+                    <th>Condições de Pagamento</th>
+                    <td>{{ result.payment_term }}</td>
+                </tr>
+                {% endif %}
+                {% if result.purchase_order %}
+                <tr>
+                    <th>Ordem de Compra</th>
+                    <td>{{ result.purchase_order }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Confiança</th>
+                    <td>{{ "%.2f" | format(result.confidence_score) if result.confidence_score is not none else "—" }}</td>
+                </tr>
+                <tr>
+                    <th>Requer Revisão</th>
+                    <td>
+                        {% if result.needs_review %}
+                            <span class="badge badge-warning">Sim</span>
+                        {% else %}
+                            <span class="badge badge-ok">Não</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Arquivo Fonte</th>
+                    <td>{{ result.source_filename }}</td>
+                </tr>
+                <tr>
+                    <th>ID da Análise</th>
+                    <td><code>{{ result.analysis_id }}</code></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Itens -->
+        {% if result.items %}
+        <div class="card">
+            <h2>Itens</h2>
+            <div class="table-wrapper">
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Qtd</th>
+                            <th>Preço Unit.</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in result.items %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ item.description or "—" }}</td>
+                            <td>{{ item.quantity if item.quantity is not none else "—" }}</td>
+                            <td>{{ item.unit_price if item.unit_price is not none else "—" }}</td>
+                            <td>{{ item.amount if item.amount is not none else "—" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="card">
+            <h2>Itens</h2>
+            <p class="muted">Nenhum item encontrado neste documento.</p>
+        </div>
+        {% endif %}
+
+        <!-- Download e ações -->
+        <div class="actions">
+            <a href="/download/csv/{{ result.analysis_id }}" class="btn">⬇ Baixar CSV</a>
+            <a href="/download/xlsx/{{ result.analysis_id }}" class="btn btn-secondary">⬇ Baixar Excel (.xlsx)</a>
+            <a href="/" class="btn btn-outline">← Nova Análise</a>
+        </div>
+    </div>
+</body>
+</html>
