@@ -1,7 +1,7 @@
 # 📄 Extrator de Documentos com Azure Document Intelligence
 
 [![License: MIT](https://img.shields.io/badge/Licença-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.11-3.12](https://img.shields.io/badge/python-3.11--3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
 **Lab prático:** Aprenda a integrar os modelos prebuilt do **Azure AI Document Intelligence** com FastAPI — incluindo **OCR Read** (extração de texto), **Receipt** (recibos) e **Invoice** (faturas) — e exportar resultados para CSV/Excel.
 
@@ -60,7 +60,8 @@ Faça upload, clique "Analisar", e em segundos tenha o resultado. É isso que vo
 ## 🛠️ Requisitos
 
 - **Seu computador:** Windows 10/11 ou macOS
-- **Python:** 3.11 ou 3.12 (⚠️ NÃO validado com 3.13+ ou 3.14+)
+- **Python:** 3.11 ou superior (✅ testado até 3.14)
+- **Git:** Opcional, para clonar o repositório ([baixar aqui](https://git-scm.com/))
 - **Conta Azure:** Com recurso Azure AI Document Intelligence criado
 - **VS Code:** Recomendado (opcional)
 - **Internet:** Conexão estável
@@ -88,8 +89,8 @@ Para quem já tem tudo configurado, em resumo será:
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/SEU_USUARIO/lab-document-intelligence.git
-cd lab-document-intelligence
+git clone https://github.com/ofabricio-oliveira/lab-azure-doc-intelligence.git
+cd lab-azure-doc-intelligence
 
 # Criar ambiente virtual
 python3 -m venv venv
@@ -173,7 +174,7 @@ AZURE_DI_KEY=sua-chave-aqui
 ## 🏗️ Estrutura do Código
 
 ```
-lab-document-intelligence/
+lab-azure-doc-intelligence/
 ├── app/
 │   ├── main.py                              # FastAPI — rotas e app principal
 │   ├── config.py                            # Configuração via .env

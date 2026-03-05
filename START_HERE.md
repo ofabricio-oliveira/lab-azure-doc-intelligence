@@ -26,7 +26,7 @@ Perfeito para aprender, experimentar e criar algo legal pro seu portfólio. 💻
 ### 1.1 — Instalar Python
 
 1. Acesse: `https://www.python.org/downloads/`
-2. ⚠️ **CRÍTICO:** Baixe **Python 3.11.x ou 3.12.x**
+2. ⚠️ **CRÍTICO:** Baixe **Python 3.11.x ou superior**
 3. Execute o instalador
 4. ⚠️ **Marque "Add Python to PATH"** na primeira tela
 5. Clique em **"Install Now"**
@@ -35,7 +35,7 @@ Perfeito para aprender, experimentar e criar algo legal pro seu portfólio. 💻
 
 ```powershell
 python --version
-# Deve mostrar: Python 3.11.x ou 3.12.x
+# Deve mostrar: Python 3.11.x ou superior
 ```
 
 ---
@@ -53,8 +53,8 @@ python --version
 
 ```powershell
 # Se tem Git:
-git clone https://github.com/SEU_USUARIO/lab-document-intelligence.git
-cd lab-document-intelligence
+git clone https://github.com/ofabricio-oliveira/lab-azure-doc-intelligence.git
+cd lab-azure-doc-intelligence
 
 # OU: baixe o ZIP e extraia
 ```

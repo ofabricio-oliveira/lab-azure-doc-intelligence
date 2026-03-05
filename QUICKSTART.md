@@ -6,7 +6,7 @@ Para quem **já tem tudo pronto** (Python, Azure Document Intelligence configura
 
 ## 📋 Requisitos
 
-- Python 3.11 ou 3.12
+- Python 3.11 ou superior
 - Recurso Azure Document Intelligence criado (endpoint + key)
 - VS Code (opcional)
 
